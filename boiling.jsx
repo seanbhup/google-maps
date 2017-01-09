@@ -1,12 +1,12 @@
 
 function BoilingVerdict(props){
-	if(props.celcius >= 100){
+	if(props.celsius >= 100){
 		return(
-			<p>The water would boil at {props.celcius}</p>
+			<p>The water would boil at {props.celsius}</p>
 		)
 	}else{
 		return(
-			<p>The water would not boil at {props.celcius} degree(s) celcius</p>
+			<p>The water would not boil at {props.celsius} degree(s) celsius</p>
 		)
 	}
 }
@@ -28,7 +28,7 @@ var TemperatureInput = React.createClass({
 		return(
 			<div>
 				<label>Enter temperature in question in {this.props.units}</label>
-				<input placeholder="Temp" value={this.state.value}  onChange={this.handleChange} />
+				<input placeholder="Temp" onChange={this.handleChange} />
 			</div>
 		)
 	}
@@ -41,10 +41,10 @@ var Calculator = React.createClass({
 		// var userEnteredTemp = this.state.value;
 		return(
 			<div>
-				<TemperatureInput units="Celcius" />
+				<TemperatureInput units="Celsius" />
 				<TemperatureInput units="Fahrenheit" />
 				<TemperatureInput units="Kelvin" />
-				<BoilingVerdict celcius={Number(1)} />
+				<BoilingVerdict celsius={Number(1)} />
 			</div>
 		)
 	}
