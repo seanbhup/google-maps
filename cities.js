@@ -1,7 +1,7 @@
 class City{
   constructor(yearRank,city,state,yearEstimate,lastCensus,change,landArea,landAreaInKm,lastPopDensity,lastPopDensityInKM,latLon){
       this.yearRank = yearRank;
-      this.nameOfCity = city;
+      this.city = city;
       this.state = state;
       this.yearEstimate = yearEstimate;
       this.lastCensus = lastCensus;
