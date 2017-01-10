@@ -1,0 +1,19 @@
+body{
+	text-align: center;
+}
+
+.boiling-color{
+	color: red;
+}
+
+.not-boiling-color{
+	color: black;
+}
+
+.freezing-color{
+	color: blue;
+}
+
+.not-freezing-color{
+	color: black;
+}

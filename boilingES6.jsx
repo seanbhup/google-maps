@@ -7,9 +7,9 @@ function toFahrenheit(c){
   return(c * 9 / 5) + 32;
 }
 
-// function toKelvin(c){
-//   return(c + 273);
-// }
+function toKelvin(c){
+  return(c + 273);
+}
 
 function tryConvert(value, unit){
   var tryNumber = Number(value);
@@ -25,14 +25,37 @@ function tryConvert(value, unit){
   }
 }
 
+  //   if(unit == "c"){
+  //     var convertedNumber = toFahrenheit(tryNumber);
+  //   }
+  //   if(unit == "f"){
+  //     var convertedNumber = toCelsius(tryNumber);
+  //   }
+  //   if(unit == "k"){
+  //     var convertedNumber = toCelsius(trynumber)
+  //   }
+  // }
+    
 function BoilingVerdict(props) {
    if (props.celsius >= 100) {
        return(
-           <p>The water would boil at {props.celsius}</p>
+           <p className="boiling"><span className="boiling-color">Boiling at {props.celsius}°C</span></p>
        )
-   } else {
+   }else{
        return(
-           <p>The water would not boil at {props.celsius}</p>
+           <p className="not-boiling"><span className="not-boiling-color">Not Boiling at {props.celsius}°C</span></p>
+       )
+   }
+}
+
+function FreezingVerdict(props) {
+   if (props.celsius <= 0) {
+       return(
+           <p className="freezing">The water would <span className="freezing-color">freeze at {props.celsius}°C</span></p>
+       )
+   }else{
+       return(
+           <p className="not-freezing">The water would not <span className="not-freezing-color">freeze at {props.celsius}°C</span></p>
        )
    }
 }
@@ -61,7 +84,7 @@ class TemperatureInput extends React.Component {
       var units = this.props.units;
        return(
            <div>
-               <label>Enter temperature in {units}</label>
+               <label>Enter a temperature in {units}</label>
                <input placeholder="Temp" value={value} onChange={this.handleChange} />
            </div>
        )
@@ -73,11 +96,12 @@ class Calculator extends React.Component {
     constructor(props){
       super(props);
       this.state = {
-        value: 0,
+        value: 100,
         scale: "c"
       };
       this.handleCelsiusChange = this.handleCelsiusChange.bind(this);
       this.handleFahrenheitChange = this.handleFahrenheitChange.bind(this);
+      this.handleKelvinChange = this.handleKelvinChange.bind(this);
     }
 
    handleCelsiusChange(value){
@@ -94,12 +118,12 @@ class Calculator extends React.Component {
     })
    }
 
-   // handleKelvinChange(value){
-   //  this.setState({
-   //    scale: "k",
-   //    value
-   //  })
-   // }
+   handleKelvinChange(value){
+    this.setState({
+      scale: "k",
+      value
+    })
+   }
 
    render() {
 
@@ -111,14 +135,19 @@ class Calculator extends React.Component {
       }else if(scale === "f"){
         var fTemp = value;
         var cTemp = tryConvert(value, "f");
+      }else if(scale === "k"){
+        var kTemp = value;
+        var ctemp = tryConvert(value, "c");
       }
 
        return(
            <div>
                <TemperatureInput units="Celsius" value={cTemp} onChange={this.handleCelsiusChange} />
                <TemperatureInput units="Fahrenheit" value={fTemp} onChange={this.handleFahrenheitChange} />
-               {/* <TemperatureInput units="Kelvin" /> */}
+               <TemperatureInput units="Kelvin" value={kTemp} onChange={this.handleKelvinChange} />
                <BoilingVerdict celsius={Number(cTemp)} />
+               <FreezingVerdict celsius={Number(cTemp)} />
+
            </div>
        )
    }
